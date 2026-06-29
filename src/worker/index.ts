@@ -1,6 +1,7 @@
 import { requireSession, type SessionVariables } from "@troop10rwc/worker-kit";
 import { Hono, type Handler, type MiddlewareHandler } from "hono";
 import type { Env } from "./env.js";
+import { buildWhatsNext } from "./whats-next.js";
 
 /**
  * Troop 10 RWC back-office **dashboard** — the apex-domain launchpad at
@@ -58,5 +59,11 @@ const home: Handler<App> = (c) => {
 
 app.get("/dashboard", auth, home);
 app.get("/dashboard/", auth, home);
+
+/** "What's Next" data island: the signed-in member's next event (role-filtered)
+ *  plus cross-app action items. The React island fetches this on mount. */
+app.get("/dashboard/api/whats-next", auth, async (c) =>
+  c.json(await buildWhatsNext(c.env, c.var.session.email)),
+);
 
 export default app;

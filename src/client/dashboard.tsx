@@ -23,6 +23,7 @@ import {
   faTent,
   faUsers,
 } from "@troop10rwc/ui/icons/solid";
+import { WhatsNext } from "./WhatsNext.js";
 
 interface Identity {
   name: string;
@@ -108,6 +109,8 @@ function Dashboard() {
         },
       ]}
     >
+      <WhatsNext />
+
       <SectionLabel>Apps</SectionLabel>
       <div className="t10-cardgrid">
         {apps.map((a) => (

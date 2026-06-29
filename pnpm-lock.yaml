@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@troop10rwc/calendar-client':
+        specifier: ^1.2.0
+        version: 1.2.0
       '@troop10rwc/shared':
         specifier: ^0.9.0
         version: 0.9.0
@@ -910,6 +913,9 @@ packages:
 
   '@speed-highlight/core@1.2.17':
     resolution: {integrity: sha512-Z92FwKpCtfaW1V0jTU/fh3QzYEZN8wDwrzRIBoADCJfn4mJCNcJN/XegifX7BDrQ8/h9Xh/JnbyMchL0FqXrkg==}
+
+  '@troop10rwc/calendar-client@1.2.0':
+    resolution: {integrity: sha512-KoFWZbvgwz+x5Iv8rikCRdjhUI9TiHF8UFO4nivBOFSSjrsClMgcvSDQoDmVkwm72XSz4+NTNZoUjOBaWREZkg==, tarball: https://npm.pkg.github.com/download/@troop10rwc/calendar-client/1.2.0/d41db74d2ef4980441af06a398fea9b480bbe1dd}
 
   '@troop10rwc/shared@0.9.0':
     resolution: {integrity: sha512-JFxzHBD94eO3mH/qHd9GRoSt7Ul6UJ9yGjh2QDiXVgVDAJFUXJt3kNuqDBCM54DHgtcLngWc0P+iTxu87irA5A==, tarball: https://npm.pkg.github.com/download/@troop10rwc/shared/0.9.0/39f564c35e251dc3554e1310132daac9803c4dbd}
@@ -1915,6 +1921,8 @@ snapshots:
   '@sindresorhus/is@7.2.0': {}
 
   '@speed-highlight/core@1.2.17': {}
+
+  '@troop10rwc/calendar-client@1.2.0': {}
 
   '@troop10rwc/shared@0.9.0': {}
 
