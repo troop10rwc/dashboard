@@ -111,7 +111,11 @@ function Dashboard() {
     >
       <WhatsNext />
 
-      <SectionLabel>Apps</SectionLabel>
+      {/* The cardgrid self-pads at --t10-s5; pad the bare label to match so its
+          underline aligns with the cards (and the WhatsNext section above). */}
+      <div style={{ padding: "0 var(--t10-s5)" }}>
+        <SectionLabel>Apps</SectionLabel>
+      </div>
       <div className="t10-cardgrid">
         {apps.map((a) => (
           <LaunchCard key={a.id} id={a.id} label={a.label} href={a.href} />
