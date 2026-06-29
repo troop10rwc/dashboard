@@ -1,0 +1,36 @@
+{
+  "name": "@troop10rwc/dashboard",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Troop 10 RWC back-office dashboard — the apex-domain launchpad (troop10rwc.org/dashboard). Auth via @troop10rwc/worker-kit requireSession.",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.11.0",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build && wrangler dev",
+    "deploy": "vite build && wrangler deploy",
+    "typecheck": "tsc -p tsconfig.worker.json --noEmit && tsc -p tsconfig.client.json --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@troop10rwc/shared": "^0.9.0",
+    "@troop10rwc/ui": "^0.9.0",
+    "@troop10rwc/worker-kit": "^0.9.0",
+    "hono": "^4.6.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240000.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.6.0",
+    "vite": "^6.4.2",
+    "vitest": "^3.2.6",
+    "wrangler": "^4.0.0"
+  }
+}

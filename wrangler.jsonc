@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "troop10-dashboard",
+  "main": "src/worker/index.ts",
+  "compatibility_date": "2025-06-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // The React island bundle (vite → public/dashboard/assets/*) served at
+  // /dashboard/assets/*. Non-asset paths (/dashboard) fall through to the
+  // Worker, which SSRs the mount shell.
+  "assets": { "directory": "./public" },
+
+  // The apex-domain launchpad. Serves only /dashboard*; the apex root and other
+  // paths belong to other Workers.
+  "routes": [{ "pattern": "troop10rwc.org/dashboard*", "zone_name": "troop10rwc.org" }],
+
+  // Shared session store (read-only here) — validated by worker-kit
+  // requireSession. Same D1 the member hub (troop10-id) writes to.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "troop10-id",
+      "database_id": "d7f3829c-c2a1-4c7e-bad9-8329eedfd257"
+    }
+  ],
+
+  "vars": {
+    // Member hub — where unauthenticated visitors sign in and where "Sign out" goes.
+    "AUTH_ORIGIN": "https://id.troop10rwc.org"
+  }
+}
