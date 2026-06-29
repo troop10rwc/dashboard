@@ -3,30 +3,12 @@ import type {
   CalendarEvent,
 } from "@troop10rwc/calendar-client";
 
-/** Event-type codes the calendar classifies events into. `event_type` is added to
- *  `getUpcomingEvents` by a companion calendar change (see the plan, repo 2);
- *  older deploys omit it, so it's optional and the dashboard degrades gracefully
- *  (an event with no type is never filtered out). */
-export type EventType =
-  | "day"
-  | "overnight"
-  | "service"
-  | "parent_meeting"
-  | "plc_meeting"
-  | (string & {});
+/** A calendar event as the dashboard consumes it. `CalendarEvent` carries
+ *  `event_type` (calendar-client ≥ 1.2.0), which drives role-aware filtering. */
+export type DashboardEvent = CalendarEvent;
 
-/** A calendar event as the dashboard consumes it: the published `CalendarEvent`
- *  plus the (optional, until the calendar is bumped) `event_type` used for
- *  role-aware filtering. */
-export type DashboardEvent = CalendarEvent & { event_type?: EventType };
-
-/** The `troop-calendar` service binding (read-only RPC). Same surface as the
- *  published `CalendarDatabaseClient`, but `getUpcomingEvents` carries
- *  `event_type` so the dashboard can filter by viewer role. */
-export interface CalendarBinding
-  extends Omit<CalendarDatabaseClient, "getUpcomingEvents"> {
-  getUpcomingEvents(daysAhead?: number): Promise<DashboardEvent[]>;
-}
+/** The `troop-calendar` service binding (read-only RPC). */
+export type CalendarBinding = CalendarDatabaseClient;
 
 /** One trip where the troop still owes the signed-in member money. Mirrors the
  *  read-only RPC added to `patrol-expense` (see the plan, repo 3). */
