@@ -122,7 +122,10 @@ export function WhatsNext(): ReactNode {
   if (error) return null; // Card is supplementary; on failure, fall back to the plain launchpad.
 
   return (
-    <section style={{ marginBottom: "var(--t10-s5)" }}>
+    // Horizontal padding matches the kit's content rhythm (headstrip + cardgrid
+    // both gutter at --t10-s5), so the label, cards, and the "Dashboard" title
+    // share one left edge instead of running to the viewport edges.
+    <section style={{ padding: "0 var(--t10-s5)", marginBottom: "var(--t10-s5)" }}>
       <SectionLabel>What's next</SectionLabel>
 
       {data == null ? (
