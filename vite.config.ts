@@ -10,6 +10,10 @@ import { defineConfig } from "vite";
 export default defineConfig({
   base: "/dashboard/assets/",
   esbuild: { jsx: "automatic" },
+  // No static publicDir: the only thing under ./public is this build's own output
+  // (outDir below). Leaving publicDir at its "public" default would make Vite copy
+  // public/ into outDir recursively (outDir is inside it) — ENAMETOOLONG.
+  publicDir: false,
   build: {
     outDir: "public/dashboard/assets",
     emptyOutDir: true,

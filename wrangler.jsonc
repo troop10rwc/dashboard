@@ -14,13 +14,29 @@
   // paths belong to other Workers.
   "routes": [{ "pattern": "troop10rwc.org/dashboard*", "zone_name": "troop10rwc.org" }],
 
-  // Shared session store (read-only here) — validated by worker-kit
-  // requireSession. Same D1 the member hub (troop10-id) writes to.
+  // Cross-app reads for the "What's Next" card. Each sibling app exposes a
+  // read-only WorkerEntrypoint RPC; we bind by service name (apex zone).
+  "services": [
+    { "binding": "CALENDAR", "service": "troop-calendar" },
+    { "binding": "EXPENSES", "service": "patrol-expense" },
+    { "binding": "GEARLIST", "service": "scoutpack" }
+  ],
+
   "d1_databases": [
+    // Shared session store (read-only here) — validated by worker-kit
+    // requireSession. Same D1 the member hub (troop10-id) writes to.
     {
       "binding": "DB",
       "database_name": "troop10-id",
       "database_id": "d7f3829c-c2a1-4c7e-bad9-8329eedfd257"
+    },
+    // Externally-managed roster (read-only) — classifies the signed-in member as
+    // scout vs adult. Same DB patrol-expense/scoutpack bind as ROSTER.
+    {
+      "binding": "ROSTER",
+      "database_name": "roster-db",
+      "database_id": "9657e9c5-3426-4af4-8aaa-706309ad6633",
+      "remote": true
     }
   ],
 
