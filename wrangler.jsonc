@@ -14,6 +14,16 @@
   // paths belong to other Workers.
   "routes": [{ "pattern": "troop10rwc.org/dashboard*", "zone_name": "troop10rwc.org" }],
 
+  // Also expose the *.workers.dev URL + per-version preview URLs so the dashboard
+  // layout is reviewable before it ships to the apex. The session cookie is
+  // `Domain=troop10rwc.org` and never reaches these hosts, so the Worker runs the
+  // preview-auth path instead (see src/worker/index.ts): it consumes the
+  // workers.dev-apex-scoped session cookie the id service mints, and bounces
+  // unauthenticated previews to the one Access-gated host (PREVIEW_AUTH_ORIGIN).
+  // That host carries the Access policy; these preview URLs don't need their own.
+  "workers_dev": true,
+  "preview_urls": true,
+
   // Cross-app reads for the "What's Next" card. Each sibling app exposes a
   // read-only WorkerEntrypoint RPC; we bind by service name (apex zone).
   "services": [
@@ -42,6 +52,11 @@
 
   "vars": {
     // Member hub — where unauthenticated visitors sign in and where "Sign out" goes.
-    "AUTH_ORIGIN": "https://id.troop10rwc.org"
+    "AUTH_ORIGIN": "https://id.troop10rwc.org",
+
+    // The Access-restricted stable workers.dev host (the id service) that signs
+    // preview visitors in and issues the tactical.workers.dev-scoped session
+    // cookie. Only consulted on a `*.workers.dev` preview host; ignored in prod.
+    "PREVIEW_AUTH_ORIGIN": "https://profile.tactical.workers.dev"
   }
 }

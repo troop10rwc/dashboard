@@ -61,4 +61,10 @@ export interface Env {
   /** Member-hub origin to bounce unauthenticated users to, e.g.
    *  https://id.troop10rwc.org. Also where "Sign out" goes. */
   AUTH_ORIGIN: string;
+  /** The stable, Cloudflare Access-restricted *.workers.dev host that signs
+   *  preview visitors in and issues the workers.dev-apex-scoped session cookie —
+   *  the workers.dev analog of AUTH_ORIGIN, owned by the id service
+   *  (e.g. https://profile.tactical.workers.dev). Unset on a plain prod request
+   *  → the dashboard just uses requireSession. Only consulted on `*.workers.dev`. */
+  PREVIEW_AUTH_ORIGIN?: string;
 }
